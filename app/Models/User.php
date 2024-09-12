@@ -16,11 +16,17 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $table = 'users';
+    protected $fillable = ['username', 'name', 'email', 'email_verified_at', 'password', 'level_id',];
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+
+    public function pembayaran()
+    {
+        return $this->hasMany(Bill::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
